@@ -1,0 +1,26 @@
+{
+  "name": "employee-tracker-hw",
+  "version": "1.0.0",
+  "description": "Employee Tracker",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CaraRosa/employee-tracker-hw.git"
+  },
+  "keywords": [
+    "Tracker"
+  ],
+  "author": "Cara Rosa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CaraRosa/employee-tracker-hw/issues"
+  },
+  "homepage": "https://github.com/CaraRosa/employee-tracker-hw#readme",
+  "dependencies": {
+    "inquirer": "^8.2.4"
+  }
+}
