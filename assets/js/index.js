@@ -2,11 +2,12 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
 
+
 const db = mysql.createConnection(
     {
         host: "localhost",
         // MySQL username,
-        
+
         user: "root",
         // TODO: Add MySQL password here
         password: "21WorkingCode*",
@@ -30,16 +31,29 @@ function mainMenu() {
 inquirer.prompt(questions).then(response => {
     // show questions based on user selection
 
-   if(response.options === 'Add Employee') {
-    addEmployee();
-   } else if (response.options === 'View All Employees'){
+   if(response.options === 'View All Employees') {
     viewAllEmployees();
+   } else if (response.options === 'Add Employee'){
+    addEmployee();
+   } else if (response.options === 'View All Roles') {
+    viewAllRoles();
    }
     
 })
 }
 
 mainMenu();
+
+function viewAllEmployees() {
+    db.query('SELECT * FROM employee;', function(err, res) {
+        if(err) {
+            console.log(err);
+        } else {
+            console.table(res);
+            mainMenu();
+        }
+    })
+}
 
 function addEmployee() {inquirer.prompt( [
     {
@@ -54,8 +68,9 @@ function addEmployee() {inquirer.prompt( [
 })
 }
 
-function viewAllEmployees() {
-    db.query('SELECT * FROM employee;', function(err, res) {
+
+function viewAllRoles() {
+    db.query('SELECT * FROM role', function(err, res) {
         if(err) {
             console.log(err);
         } else {
@@ -64,6 +79,13 @@ function viewAllEmployees() {
         }
     })
 }
+
+
+
+// function updateEmployeeRole() {
+
+// }
+
 // create functions that handle when a user chooses one option, they are prompted with the next option
 // call those functions starting on line 15
 
