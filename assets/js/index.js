@@ -5,7 +5,7 @@ const mysql = require('mysql2');
 
 const db = mysql.createConnection(
     {
-        host: "localhost",
+        host: "127.0.0.1",
         // MySQL username,
 
         user: "root",
@@ -37,6 +37,8 @@ inquirer.prompt(questions).then(response => {
     addEmployee();
    } else if (response.options === 'View All Roles') {
     viewAllRoles();
+   } else if (response.options === 'View All Departments') {
+    viewAllDepartments();
    }
     
 })
@@ -58,19 +60,63 @@ function viewAllEmployees() {
 function addEmployee() {inquirer.prompt( [
     {
         type: 'input',
-        name: 'employeeName',
-        message: 'What employee do you want to add?',
+        name: 'employeeFirstName',
+        message: 'What is the employee`s first name?'
 
+    },
+    {
+        type: 'input',
+        name: 'employeeLastName',
+        message: 'What is the employee`s last name?'
+    },
+    {
+        type: 'list',
+        name: 'roles',
+        message: 'What is the employee`s role?',
+        choices: ['Sales Lead', 'Salesperson', 'Lead Engineer', 'Software Engineer', 'Account Manager', 'Accountant', 'Legal Team Lead']
+    },
+    {
+        type: 'list',
+        name: 'managers',
+        message: 'Who is the employee`s manager?',
+        choices: ['John Doe', 'Mike Chan', 'Ashley Rodgriguez', 'Kevin Tupek', 'Kunal Singh', 'Malia Brown']
     }
 ]).then(response =>{
-    console.log(response)
-    mainMenu();
-})
+    const firstName = response.employeeFirstName;
+    const lastName = response.employeeLastName;
+    const roleId = response.roleId;
+    const managerId = response.managerId;
+
+    db.query(
+        'INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES(?, ?, ?, ?)', [firstName, lastName, roleId, managerId],
+        function (err, res) {
+            if(err) {
+                console.log(err);
+            } else {
+                console.log('Employee added successfully!');
+                mainMenu();
+            }
+        }
+    );
+
+});
+
 }
 
 
 function viewAllRoles() {
     db.query('SELECT * FROM role', function(err, res) {
+        if(err) {
+            console.log(err);
+        } else {
+            console.table(res);
+            mainMenu();
+        }
+    })
+}
+
+function viewAllDepartments() {
+    db.query('SELECT * FROM department', function(err, res) {
         if(err) {
             console.log(err);
         } else {
