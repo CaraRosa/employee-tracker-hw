@@ -6,8 +6,12 @@ The Employee Tracker application is designed for companies to be able to have an
 
 ## Installation
 
-No installation needed. A screenshot of the employee tracker in the terminal is below:
+No installation needed.
 
+A demo video of the app is below:
+[Employee Tracker Demo Video](https://drive.google.com/file/d/1rlJaSUkOjCPQOgZW7qYB-w1b45zbHemc/view).
+
+A screenshot of the employee tracker in the terminal is below:
 ![Alt text](./images/employee-tracker.png)
 
 ## Credits
